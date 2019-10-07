@@ -3,7 +3,7 @@
 # Libraries:
 import rospy
 import numpy as np
-from obj_class import Updated_Probabilities_and_Cls,closest_node,Object_Map_cls,Search_Radius
+from obj_class_old import Updated_Probabilities_and_Cls,closest_node,Object_Map_cls,Search_Radius
 
 # Msgs:
 from joint_object_localizer.msg import OG_List
