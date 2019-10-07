@@ -48,7 +48,6 @@ while not rospy.is_shutdown():
         new_center = np.array([[data.object_list[ii].x_center,data.object_list[ii].y_center]])
         # The first object initializer:
         if len(object_class_list) == 0:
-            print(1)
             # Adding the first object to the map msg:
             object_mapped_values.object_map.append(obj_new)
             OM_publisher.publish(object_mapped_values)
@@ -92,10 +91,9 @@ while not rospy.is_shutdown():
             objects_center = np.concatenate((objects_center,new_center))
         
         else:
-            object_class_list[ii].viewed_number += 1
-            
-            object_class_list[ii].prob_distribution,object_class_list[ii].cls_num = Updated_Probabilities_and_Cls(object_class_list[ii].prob_distribution,obj_new.probabilities,object_class_list[ii].viewed_number,obj_new.cls_num)
-            object_mapped_values.object_map[ii].probabilities = object_class_list[ii].prob_distribution
-            object_mapped_values.object_map[ii].cls_num = object_class_list[ii].cls_num
+            object_class_list[index].viewed_number += 1
+            object_class_list[index].prob_distribution,object_class_list[index].cls_num = Updated_Probabilities_and_Cls(object_class_list[index].prob_distribution,obj_new.probabilities,object_class_list[ii].viewed_number,obj_new.cls_num)
+            object_mapped_values.object_map[index].probabilities = object_class_list[index].prob_distribution
+            object_mapped_values.object_map[index].cls_num = object_class_list[index].cls_num
 
         OM_publisher.publish(object_mapped_values)
